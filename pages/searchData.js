@@ -1,11 +1,10 @@
-import Header from "@/components/layout/Header";
+import Layout from "@/components/Layout";
 
 const SearchData = () => {
     return (
-        <div>
-            <Header />
+        <Layout>
             <p>Search for specific id</p>
-        </div>
+        </Layout>
     );
 };
 

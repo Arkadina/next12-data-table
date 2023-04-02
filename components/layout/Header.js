@@ -4,7 +4,7 @@ import React from "react";
 
 function Header() {
     return (
-        <header className="flex flex-row h-[60px] w-full  items-center px-40 justify-between">
+        <header className="flex flex-row h-[80px] w-full  items-center px-40 justify-between">
             <span className="text-2xl font-bold">DataTable</span>
             <nav className="">
                 <ul className="flex">
@@ -16,7 +16,7 @@ function Header() {
                     />
                 </ul>
             </nav>
-            <div className="h-full"></div>
+            <div className="h-full w-[100px]"></div>
         </header>
     );
 }

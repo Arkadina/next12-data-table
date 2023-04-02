@@ -1,11 +1,10 @@
-import Header from "@/components/layout/Header";
+import Layout from "@/components/Layout";
 
 const AddData = () => {
     return (
-        <div>
-            <Header />
+        <Layout>
             <p>Add Data</p>
-        </div>
+        </Layout>
     );
 };
 
