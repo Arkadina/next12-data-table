@@ -1,12 +1,12 @@
 import Header from "@/components/layout/Header";
 
-const Index = () => {
+const SearchData = () => {
     return (
         <div>
             <Header />
-            <p>Index page</p>
+            <p>Search for specific id</p>
         </div>
     );
 };
 
-export default Index;
+export default SearchData;

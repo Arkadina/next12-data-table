@@ -1,12 +1,12 @@
 import Header from "@/components/layout/Header";
 
-const Index = () => {
+const AddData = () => {
     return (
         <div>
             <Header />
-            <p>Index page</p>
+            <p>Add Data</p>
         </div>
     );
 };
 
-export default Index;
+export default AddData;
