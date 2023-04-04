@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import ButtonActive from "@/components/widgets/ButtonActive";
 
 const Index = () => {
     return (
@@ -21,7 +22,19 @@ const Index = () => {
                             <td>3464323532</td>
                             <td>test@gmaill.com</td>
                             <td>2121</td>
+                            <td>
+                                <ButtonActive text="active" />
+                            </td>
+                            <td>Editar Excluir</td>
+                        </tr>
+                        <tr className="text-secundary text-[16px] h-[40px]   ">
+                            <td>1</td>
+                            <td>3464323532</td>
+                            <td>test@gmaill.com</td>
                             <td>2121</td>
+                            <td>
+                                <ButtonActive text="inactive" color="red" />
+                            </td>
                             <td>Editar Excluir</td>
                         </tr>
                     </tbody>
