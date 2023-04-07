@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import Layout from "@/components/Layout";
+import ButtonAction from "@/components/widgets/ButtonAction";
 
 const AddData = () => {
     const [optionState, setOptionState] = useState("active");
@@ -15,7 +15,7 @@ const AddData = () => {
                     </span>
                     <input
                         type="email"
-                        className="w-[250px] outline-none px-2 text-[12px] rounded-md border-2 border-primary h-[35px] "
+                        className="w-[250px] outline-none px-2 text-[12px] rounded-md border-2 border-primary h-[40px] "
                     />
                 </div>
                 <div className="flex items-center justify-between w-[400px] mt-[30px]">
@@ -24,7 +24,7 @@ const AddData = () => {
                     </span>{" "}
                     <input
                         type="password"
-                        className="w-[250px] outline-none px-2 text-[12px] rounded-md border-2 border-primary h-[35px]"
+                        className="w-[250px] outline-none px-2 text-[12px] rounded-md border-2 border-primary h-[40px]"
                     />
                 </div>
                 <div className="flex items-center justify-between w-[400px] mt-[30px]">
@@ -33,7 +33,7 @@ const AddData = () => {
                     </span>
                     <select
                         defaultValue={optionState}
-                        className="flex items-center rounded-md border-2 border-primary bg-transparent text-primary px-3 h-[35px] w-[120px] justify-center"
+                        className="flex items-center rounded-md border-2 border-primary bg-transparent text-primary px-3 h-[40px] w-[120px] justify-center"
                     >
                         <option value="active" className="text-black">
                             active
@@ -41,10 +41,7 @@ const AddData = () => {
                         <option value="inactive">inactive</option>
                     </select>
                 </div>
-                <button className="flex cursor-pointer w-[400px] bg-primary text-white font-bold py-3 items-center justify-center rounded-md mt-[40px] hover:opacity-80">
-                    CREATE{" "}
-                    <ArrowRightIcon className="h-6 w-6 relative left-[130px] " />
-                </button>
+                <ButtonAction text="CREATE" mt="40" width="400" left="130" />
             </form>
         </Layout>
     );
