@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import ButtonActive from "@/components/widgets/ButtonActive";
+import Head from "next/head";
 
 const Index = () => {
     return (
