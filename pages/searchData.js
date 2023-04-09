@@ -14,8 +14,7 @@ const SearchData = () => {
                         className="w-[250px] outline-none px-2 text-[12px] rounded-md border-2 border-primary h-[40px] "
                     />
                 </div>
-
-                <ButtonAction text="SEARCH" width="300" left="90" />
+                <ButtonAction text="SEARCH" width="250" left="60" />
             </form>
         </Layout>
     );

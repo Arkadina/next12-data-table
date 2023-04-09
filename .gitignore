@@ -15,6 +15,8 @@
 # production
 /build
 /package-lock.json
+/config
+/todo.md
 
 # misc
 .DS_Store

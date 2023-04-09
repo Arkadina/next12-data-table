@@ -1,4 +1,5 @@
 import "../styles/global.css";
+import "../config/firebase";
 
 import { Poppins } from "next/font/google";
 
