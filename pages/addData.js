@@ -5,12 +5,14 @@ import ButtonAction from "@/components/widgets/ButtonAction";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { useRouter } from "next/router";
+import { DateTime } from "luxon";
 
 const AddData = () => {
     const [optionState, setOptionState] = useState("active");
     const [inputPassword, setInputPassword] = useState("");
     const [inputEmail, setInputEmail] = useState("");
     const router = useRouter();
+
 
     async function handleOnSubmit(e) {
         e.preventDefault();
@@ -19,6 +21,7 @@ const AddData = () => {
             email: inputEmail,
             password: inputPassword,
             activity: optionState,
+            created_at: DateTime.now().toISODate(),
         });
 
         router.push("/");
