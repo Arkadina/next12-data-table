@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import ButtonActive from "@/components/widgets/ButtonActive";
+import Loader from "@/components/widgets/Loader";
 import { db } from "@/config/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import Link from "next/link";
