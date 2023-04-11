@@ -10,10 +10,7 @@ function Header() {
                 <ul className="flex">
                     <HeaderItem text="Home" href="/" />
                     <HeaderItem text="Add data" href="/addData" />
-                    <HeaderItem
-                        text="Search for specific Id"
-                        href="/searchData"
-                    />
+                    <HeaderItem text="Search for specific Id" href="/users" />
                 </ul>
             </nav>
             <div className="h-full w-[100px]"></div>
@@ -25,11 +22,12 @@ export default Header;
 
 const HeaderItem = ({ text, href }) => {
     const router = useRouter();
-
     return (
         <li
             className={`[&:not(:last-of-type)]:mr-6 ${
-                router.route == href ? `text-primary` : "text-dark"
+                `/${router.route.split("/", 2)[1]}` == href
+                    ? `text-primary`
+                    : "text-dark"
             } text-base`}
         >
             <Link href={href}>{text}</Link>

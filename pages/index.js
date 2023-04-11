@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { db } from "@/config/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 
 import Layout from "@/components/Layout";
 import ButtonActive from "@/components/widgets/ButtonActive";
@@ -18,9 +18,11 @@ const Index = () => {
 
     async function getInitialData() {
         setIsLoading(true);
-        let res = await getDocs(collection(db, "data"));
-        setData(res.docs);
-        setIsLoading(false);
+
+        await onSnapshot(collection(db, "data"), (snapshot) => {
+            setData(snapshot.docs);
+            setIsLoading(false);
+        });
     }
 
     return (
@@ -42,7 +44,10 @@ const Index = () => {
                         </thead>
                         <tbody>
                             {data.map((item, i) => (
-                                <tr className="text-secundary text-[16px] h-[40px]" key={item.ref.id}>
+                                <tr
+                                    className="text-secundary text-[16px] h-[40px]"
+                                    key={item.ref.id}
+                                >
                                     <td>{i}</td>
                                     <td>{item.ref.id}</td>
                                     <td>{item.data().email}</td>
