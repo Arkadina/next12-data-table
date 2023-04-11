@@ -5,26 +5,46 @@ import ButtonAction from "@/components/widgets/ButtonAction";
 import ButtonActive from "@/components/widgets/ButtonActive";
 import Loader from "@/components/widgets/Loader";
 
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { collection, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/config/firebase";
 
 const SearchDataProps = ({ doc_data, doc_id }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState();
+    const [inputId, setInputId] = useState("");
+    const [docId, setDocId] = useState();
 
     useEffect(() => {
         setIsLoading(true);
         setData(doc_data);
+        setDocId(doc_id);
+        console.log("resetou");
         setIsLoading(false);
-    });
+    }, []);
 
-    function handleOnSubmit() {}
+    async function handleOnSubmit(e) {
+        e.preventDefault();
+
+        setIsLoading(true);
+        const docRef = doc(db, "data", inputId.trim());
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            setData(docSnap.data());
+            setDocId(inputId.trim());
+        } else {
+            console.log("Não existe");
+        }
+
+        setIsLoading(false);
+    }
 
     return (
         <Layout>
-            <form className="flex flex-row justify-center  w-full mt-20">
+            <form
+                className="flex flex-row justify-center  w-full mt-20"
+                onSubmit={handleOnSubmit}
+            >
                 <div className="flex items-center w-[300px] mr-5">
                     <span className="text-primary tracking-widest text-left font-light text-lg mr-5">
                         ID
@@ -33,9 +53,15 @@ const SearchDataProps = ({ doc_data, doc_id }) => {
                         type="text"
                         className="w-[250px] outline-none px-2 text-[12px] rounded-md border-2 border-primary h-[40px]"
                         defaultValue={doc_id}
+                        onChange={(e) => setInputId(e.target.value)}
                     />
                 </div>
-                <ButtonAction text="SEARCH" width="250" left="60" />
+                <ButtonAction
+                    text="SEARCH"
+                    width="250"
+                    left="60"
+                    type="submit"
+                />
             </form>
             <div className="flex justify-center w-full mt-20">
                 {isLoading ? (
@@ -54,9 +80,9 @@ const SearchDataProps = ({ doc_data, doc_id }) => {
                         <tbody>
                             <tr
                                 className="text-secundary text-[16px] h-[40px]"
-                                key={doc_id}
+                                key={docId}
                             >
-                                <td>{doc_id}</td>
+                                <td>{docId}</td>
                                 <td>{data.email}</td>
                                 <td>{data.created_at}</td>
                                 <td>
@@ -89,9 +115,9 @@ export async function getServerSideProps(context) {
     const docRef = doc(db, "data", `${id}`);
     const docSnap = await getDoc(docRef);
 
-    console.log(docSnap);
+    const doc_data = docSnap.exists() ? docSnap.data() : "";
 
-    return { props: { doc_data: docSnap.data(), doc_id: id } };
+    return { props: { doc_data: doc_data, doc_id: id } };
 }
 
 export default SearchDataProps;

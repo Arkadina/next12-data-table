@@ -19,10 +19,13 @@ const SearchDataIndex = () => {
         const docRef = doc(db, "data", inputId.trim());
         const docSnap = await getDoc(docRef);
 
+        console.log(inputId);
+
         if (docSnap.exists()) {
             console.log("Existe");
             setData(docSnap.data());
         } else {
+            setData(423);
             console.log("Não existe");
         }
 
