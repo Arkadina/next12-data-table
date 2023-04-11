@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/config/firebase";
+
 import Layout from "@/components/Layout";
 import ButtonAction from "@/components/widgets/ButtonAction";
 import ButtonActive from "@/components/widgets/ButtonActive";
 import Loader from "@/components/widgets/Loader";
-
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "@/config/firebase";
+import Alert from "@/components/widgets/Alert";
 
 const SearchDataProps = ({ doc_data, doc_id }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState();
     const [inputId, setInputId] = useState("");
     const [docId, setDocId] = useState();
+    const [alert, setAlert] = useState(null);
 
     useEffect(() => {
         setIsLoading(true);
@@ -24,16 +26,17 @@ const SearchDataProps = ({ doc_data, doc_id }) => {
 
     async function handleOnSubmit(e) {
         e.preventDefault();
-
-        setIsLoading(true);
-        const docRef = doc(db, "data", inputId.trim());
+        const docRef = doc(db, "data", inputId.trim() || doc_id);
         const docSnap = await getDoc(docRef);
+
+        setAlert(null);
+        setIsLoading(true);
 
         if (docSnap.exists()) {
             setData(docSnap.data());
             setDocId(inputId.trim());
         } else {
-            console.log("Não existe");
+            setAlert(`Document with id ${docId} does not exist.`);
         }
 
         setIsLoading(false);
@@ -105,6 +108,14 @@ const SearchDataProps = ({ doc_data, doc_id }) => {
                     </div>
                 )}
             </div>
+            {alert && (
+                <Alert
+                    text={alert}
+                    width="350px"
+                    height="50px"
+                    timeOnScreen="5"
+                />
+            )}
         </Layout>
     );
 };

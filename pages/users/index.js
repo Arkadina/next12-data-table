@@ -1,16 +1,19 @@
 import { useState } from "react";
 
+import { db } from "@/config/firebase";
+import { doc, getDoc } from "firebase/firestore";
+
 import Layout from "@/components/Layout";
 import ButtonAction from "@/components/widgets/ButtonAction";
 import ButtonActive from "@/components/widgets/ButtonActive";
 import Loader from "@/components/widgets/Loader";
-import { db } from "@/config/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import Alert from "@/components/widgets/Alert";
 
 const SearchDataIndex = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState();
     const [inputId, setInputId] = useState("");
+    const [alert, setAlert] = useState(null);
 
     async function handleOnSubmit(e) {
         e.preventDefault();
@@ -19,14 +22,12 @@ const SearchDataIndex = () => {
         const docRef = doc(db, "data", inputId.trim());
         const docSnap = await getDoc(docRef);
 
-        console.log(inputId);
-
         if (docSnap.exists()) {
-            console.log("Existe");
             setData(docSnap.data());
         } else {
-            setData(423);
-            console.log("Não existe");
+            setAlert(
+                `Document with id ${inputId.slice(0, 18)}... does not exist.`
+            );
         }
 
         setIsLoading(false);
@@ -101,6 +102,14 @@ const SearchDataIndex = () => {
                     </div>
                 )}
             </div>
+            {alert && (
+                <Alert
+                    text={alert}
+                    width="380px"
+                    height="50px"
+                    timeOnScreen="5"
+                />
+            )}
         </Layout>
     );
 };
