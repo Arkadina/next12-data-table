@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-function Alert({ text, height, width, timeOnScreen }) {
+function Alert({ text, timeOnScreen }) {
     const [timeState, setTimeState] = useState(1000 * timeOnScreen);
     const [isVisible, setIsVisible] = useState(true);
 
@@ -32,8 +32,7 @@ function Alert({ text, height, width, timeOnScreen }) {
                                 "translatex(0px)",
                             ],
                         }}
-                        style={{ height, width }}
-                        className="flex items-center justify-center absolute top-[40px] right-[100px] text-xs bg-red rounded text-white"
+                        className="flex items-center justify-center absolute top-[40px] right-[100px] text-xs bg-red rounded text-white py-5 px-10"
                     >
                         <p>{text}</p>
                     </motion.div>

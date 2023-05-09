@@ -19,7 +19,7 @@ const SearchDataIndex = () => {
         e.preventDefault();
 
         setIsLoading(true);
-        const docRef = doc(db, "data", inputId.trim());
+        const docRef = doc(db, `data/${inputId.trim()}`);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -28,6 +28,7 @@ const SearchDataIndex = () => {
             setAlert(
                 `Document with id ${inputId.slice(0, 18)}... does not exist.`
             );
+            setData();
         }
 
         setIsLoading(false);
@@ -49,12 +50,7 @@ const SearchDataIndex = () => {
                         onChange={(e) => setInputId(e.target.value)}
                     />
                 </div>
-                <ButtonAction
-                    text="SEARCH"
-                    width="250"
-                    left="60"
-                    type="submit"
-                />
+                <ButtonAction text="SEARCH" type="submit" />
             </form>
             <div className="flex justify-center w-full mt-20">
                 {isLoading ? (
@@ -102,14 +98,7 @@ const SearchDataIndex = () => {
                     </div>
                 )}
             </div>
-            {alert && (
-                <Alert
-                    text={alert}
-                    width="380px"
-                    height="50px"
-                    timeOnScreen="5"
-                />
-            )}
+            {alert && <Alert text={alert} timeOnScreen="5" />}
         </Layout>
     );
 };

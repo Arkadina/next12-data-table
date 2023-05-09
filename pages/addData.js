@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { DateTime } from "luxon";
+
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "@/config/firebase";
 
 import Layout from "@/components/Layout";
 import ButtonAction from "@/components/widgets/ButtonAction";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "@/config/firebase";
-import { useRouter } from "next/router";
-import { DateTime } from "luxon";
+
+
 
 const AddData = () => {
     const [optionState, setOptionState] = useState("active");
@@ -72,8 +75,6 @@ const AddData = () => {
                 <ButtonAction
                     text="CREATE"
                     mt="30"
-                    width="400"
-                    left="130"
                     type="submit"
                 />
             </form>

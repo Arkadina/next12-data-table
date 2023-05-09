@@ -20,7 +20,6 @@ const SearchDataProps = ({ doc_data, doc_id }) => {
         setIsLoading(true);
         setData(doc_data);
         setDocId(doc_id);
-        console.log("resetou");
         setIsLoading(false);
     }, []);
 
@@ -37,6 +36,7 @@ const SearchDataProps = ({ doc_data, doc_id }) => {
             setDocId(inputId.trim());
         } else {
             setAlert(`Document with id ${docId} does not exist.`);
+            setData();
         }
 
         setIsLoading(false);
@@ -59,12 +59,7 @@ const SearchDataProps = ({ doc_data, doc_id }) => {
                         onChange={(e) => setInputId(e.target.value)}
                     />
                 </div>
-                <ButtonAction
-                    text="SEARCH"
-                    width="250"
-                    left="60"
-                    type="submit"
-                />
+                <ButtonAction text="SEARCH" type="submit" />
             </form>
             <div className="flex justify-center w-full mt-20">
                 {isLoading ? (
@@ -108,14 +103,7 @@ const SearchDataProps = ({ doc_data, doc_id }) => {
                     </div>
                 )}
             </div>
-            {alert && (
-                <Alert
-                    text={alert}
-                    width="350px"
-                    height="50px"
-                    timeOnScreen="5"
-                />
-            )}
+            {alert && <Alert text={alert} timeOnScreen="5" />}
         </Layout>
     );
 };

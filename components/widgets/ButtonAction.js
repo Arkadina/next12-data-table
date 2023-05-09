@@ -1,16 +1,18 @@
 import React from "react";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
-function ButtonAction({ text, width, mt, left, type }) {
+function ButtonAction({ text, mt, type = "button" }) {
     return (
         <button
-            className={`flex cursor-pointer w-[${width}px] bg-primary text-white font-bold py-3 items-center justify-center rounded-md mt-[${
+            className={`flex cursor-pointer px-4 min-w-[180px] bg-primary text-white font-bold py-3 items-center justify-center rounded-md mt-[${
                 mt ? mt : 0
             }px] hover:opacity-80`}
-            type={`${type ? type : "button"}`}
+            type={`${type}`}
         >
-            {text}
-            <ArrowRightIcon className={`relative left-[${left}px] h-6 w-6 `} />
+            <span className="flex items-center justify-center flex-1">
+                {text}
+            </span>
+            <ArrowRightIcon className="h-5 w-5 ml-5" />
         </button>
     );
 }
