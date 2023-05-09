@@ -8,6 +8,7 @@ import Layout from "@/components/Layout";
 import ButtonActive from "@/components/widgets/ButtonActive";
 import Loader from "@/components/widgets/Loader";
 import EditData from "@/components/widgets/EditData";
+import { AnimatePresence } from "framer-motion";
 
 const Index = () => {
     const [data, setData] = useState();
@@ -44,7 +45,12 @@ const Index = () => {
     return (
         <Layout>
             {isVisible && (
-                <EditData handleIsVisible={handleIsVisible} data={editData} />
+                <AnimatePresence>
+                    <EditData
+                        handleIsVisible={handleIsVisible}
+                        data={editData}
+                    />
+                </AnimatePresence>
             )}
             <div className="flex justify-center w-full mt-20">
                 {isLoading ? (

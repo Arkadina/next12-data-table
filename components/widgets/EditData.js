@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { doc, setDoc } from "firebase/firestore";
-import ButtonAction from "./ButtonAction";
 import { db } from "@/config/firebase";
+
+import ButtonAction from "./ButtonAction";
 
 function EditData({ data, handleIsVisible }) {
     const [optionState, setOptionState] = useState(data.activity);
@@ -12,8 +14,6 @@ function EditData({ data, handleIsVisible }) {
         width: undefined,
         height: undefined,
     });
-
-    console.log(data);
 
     useEffect(() => {
         function handleResize() {
@@ -42,26 +42,30 @@ function EditData({ data, handleIsVisible }) {
             { merge: true }
         );
 
-        handleIsVisible()
+        handleIsVisible();
     }
 
     return (
         <div
-            className={`w-full absolute flex justify-center items-center cursor-pointer`}
+            className={`w-full absolute flex justify-center items-center`}
             style={{
-                height: `${windowSize.height - 80}px`,
+                height: `${windowSize.height - 200}px`,
             }}
             onClick={(e) => {
                 handleIsVisible();
             }}
         >
-            <div
-                className="h-[400px] px-6 py-5 w-[500px] bg-slate-50 rounded-lg flex flex-col"
+            <motion.div
+                className="h-[400px] px-6 py-5 w-[500px] bg-white shadow-sm  rounded-lg flex flex-col border-primary border-[1px]"
                 onClick={(e) => e.stopPropagation()}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.2 }}
             >
-                <div className="w-full flex justify-end items-center">
+                <div className="w-full flex justify-between items-center">
+                    <span className="text-primary font-bold">Edit data</span>
                     <XMarkIcon
-                        className="h-5 w-5 ml-5"
+                        className="h-5 w-5 ml-5 text-primary"
                         onClick={() => handleIsVisible()}
                     />
                 </div>
@@ -97,7 +101,7 @@ function EditData({ data, handleIsVisible }) {
                         </span>
                         <select
                             defaultValue={optionState}
-                            className="flex items-center rounded-md border-2 border-primary bg-transparent text-primary px-3 h-[40px] w-[120px] justify-center"
+                            className="flex items-center rounded-md border-2 border-primary bg-transparent text-primary px-3 h-[40px] w-[120px] justify-center bg-white"
                             onChange={(e) => setOptionState(e.target.value)}
                         >
                             <option
@@ -113,7 +117,7 @@ function EditData({ data, handleIsVisible }) {
 
                     <ButtonAction text="UPDATE" mt="30" type="submit" />
                 </form>
-            </div>
+            </motion.div>
         </div>
     );
 }
