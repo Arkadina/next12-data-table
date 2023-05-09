@@ -8,14 +8,11 @@ import { db } from "@/config/firebase";
 import Layout from "@/components/Layout";
 import ButtonAction from "@/components/widgets/ButtonAction";
 
-
-
 const AddData = () => {
     const [optionState, setOptionState] = useState("active");
-    const [inputPassword, setInputPassword] = useState("");
-    const [inputEmail, setInputEmail] = useState("");
+    const [inputPassword, setInputPassword] = useState();
+    const [inputEmail, setInputEmail] = useState();
     const router = useRouter();
-
 
     async function handleOnSubmit(e) {
         e.preventDefault();
@@ -72,11 +69,7 @@ const AddData = () => {
                     </select>
                 </div>
 
-                <ButtonAction
-                    text="CREATE"
-                    mt="30"
-                    type="submit"
-                />
+                <ButtonAction text="CREATE" mt="30" type="submit" />
             </form>
         </Layout>
     );

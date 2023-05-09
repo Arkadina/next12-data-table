@@ -63,7 +63,6 @@ const SearchDataIndex = () => {
                                 <th>EMAIL</th>
                                 <th>CREATED_AT</th>
                                 <th>STATUS</th>
-                                <th>ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,7 +83,6 @@ const SearchDataIndex = () => {
                                         }
                                     />
                                 </td>
-                                <td>Editar Excluir</td>
                             </tr>
                         </tbody>
                     </table>

@@ -72,7 +72,6 @@ const SearchDataProps = ({ doc_data, doc_id }) => {
                                 <th>EMAIL</th>
                                 <th>CREATED_AT</th>
                                 <th>STATUS</th>
-                                <th>ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,7 +92,6 @@ const SearchDataProps = ({ doc_data, doc_id }) => {
                                         }
                                     />
                                 </td>
-                                <td>Editar Excluir</td>
                             </tr>
                         </tbody>
                     </table>
